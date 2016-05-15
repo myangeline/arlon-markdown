@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/nativize.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/section.css">
+    <link rel="stylesheet" href="assets/css/content.css">
+
+    <link rel="import" href="sections/demo.html">
+</head>
+<body>
+    <nav class="nav js-nav hide-navigate-bar">
+        <header class="nav-header">
+            <h1 class="nav-title">ArrlonMarkdown</h1>
+        </header>
+        <div class="nav-item u-main-default">
+            <h5 class="nav-dir">
+                <svg class="nav-icon">
+                    <use xlink:href="assets/img/icons.svg#icon-windows"></use>
+                </svg>
+                WINDOW
+            </h5>
+            <button type="button" id="button-windows" data-section="windows" class="nav-button">Create and manage <em>windows</em></button>
+            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Handling window <em>crashes and hangs</em></button>
+        </div>
+    </nav>
+
+    <main class="content js-content u-main-default is-shown">
+
+        <section class="section js-section section-source is-shown">
+            <textarea name="markdown" class="u-markdown">hello electron...</textarea>
+        </section>
+
+        <section class="section js-section section-html">
+            <textarea name="markdown" class="u-markdown">hello electron...</textarea>
+        </section>
+
+    </main>
+
+
+    <script>
+        require('./assets/nav');
+    </script>
+
+</body>
+</html>
