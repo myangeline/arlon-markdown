@@ -142,6 +142,11 @@ ipc.on('open-file', function(event, filePath){
 });
 
 
+ipc.on('git-add', function(event){
+   console.log('git add: ', event);
+});
+
+
 
 function toggleNavBar(){
     var navClass = document.querySelector('.nav').classList;

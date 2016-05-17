@@ -3,6 +3,7 @@
  */
 "use strict";
 const fs = require('fs');
+const childProcess =  require('child_process');
 
 module.exports = function (electron) {
 
@@ -164,6 +165,35 @@ module.exports = function (electron) {
             ]
         },
         {
+            label: 'Tools',
+            submenu: [
+                {
+                    label: 'Git Add',
+                    click: function (item, focusedWindow) {
+                        onGitAddClick(focusedWindow);
+                    }
+                },
+                {
+                    label: 'Git Commit',
+                    click: function (item, focusedWindow) {
+
+                    }
+                },
+                {
+                    label: 'Git Pull',
+                    click: function (item, focusedWindow) {
+
+                    }
+                },
+                {
+                    label: 'Git Push',
+                    click: function (item, focusedWindow) {
+
+                    }
+                }
+            ]
+        },
+        {
             label: 'Help',
             role: 'help',
             submenu: [
@@ -225,4 +255,19 @@ module.exports = function (electron) {
             }
         });
     }
+
+    function onGitAddClick(focusedWindow){
+        run_cmd( "G:\\Program Files\\Git\\bin\\git.exe", ["show"], function(text) { console.log (text) });
+        focusedWindow.webContents.send('git-add');
+    }
+
+    function run_cmd(cmd, args, callback ) {
+        var spawn = childProcess.spawn;
+        var child = spawn(cmd, args);
+        var resp = "";
+
+        child.stdout.on('data', function (buffer) { resp += buffer.toString() });
+        child.stdout.on('end', function() { callback (resp) });
+    }
+
 };
