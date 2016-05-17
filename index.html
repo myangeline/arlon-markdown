@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="assets/css/section.css">
     <link rel="stylesheet" href="assets/css/content.css">
 
+    <link rel="stylesheet" href="node_modules/highlight.js/styles/vs.css">
+
     <link rel="import" href="sections/demo.html">
 </head>
 <body>
@@ -19,25 +21,26 @@
             <h1 class="nav-title">ArrlonMarkdown</h1>
         </header>
         <div class="nav-item u-main-default">
-            <h5 class="nav-dir">
+            <h5 class="nav-dir dir-root">
                 <svg class="nav-icon">
                     <use xlink:href="assets/img/icons.svg#icon-windows"></use>
                 </svg>
-                WINDOW
+                <span>WINDOW</span>
             </h5>
-            <button type="button" id="button-windows" data-section="windows" class="nav-button">Create and manage <em>windows</em></button>
-            <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Handling window <em>crashes and hangs</em></button>
+            <div class="nav-sub-item">
+
+            </div>
         </div>
     </nav>
 
     <main class="content js-content u-main-default is-shown">
 
         <section class="section js-section section-source is-shown">
-            <textarea name="markdown" class="u-markdown">hello electron...</textarea>
+            <textarea name="markdown" class="u-markdown" autofocus></textarea>
         </section>
 
         <section class="section js-section section-html">
-            <textarea name="markdown" class="u-markdown">hello electron...</textarea>
+            <div class="u-markdown-prev markdown"></div>
         </section>
 
     </main>

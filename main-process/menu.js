@@ -2,10 +2,12 @@
  * Created by lujin on 2016/5/12.
  */
 "use strict";
+const fs = require('fs');
+
 module.exports = function (electron) {
 
     this.remote = electron.remote;
-
+    const dialog = electron.dialog;
 
     this.template = [
         {
@@ -35,24 +37,15 @@ module.exports = function (electron) {
                 {
                     label: 'Open File',
                     accelerator: 'CmdOrCtrl+O',
-                    click: function () {
-                        const dialog = electron.dialog;
-                        dialog.showOpenDialog({
-                            properties: ['openFile']
-                        }, function(files){
-                            if (files){
-                                console.log(files);
-                                var fs = require('fs')
-                                fs.readFile(files[0], 'utf8', function(err, data){
-                                    console.log(data);
-                                })
-                                //event.sender.send('selected-files', files);
-                            }
-                        });
+                    click: function (item, focusedWindow) {
+                        onOpenFileClick(focusedWindow);
                     }
                 },
                 {
                     label: 'Open Folder',
+                    click: function(item, focusedWindow){
+                        onOpenFolderClick(focusedWindow);
+                    }
                 },
                 {
                     label: 'Open Recent',
@@ -204,5 +197,32 @@ module.exports = function (electron) {
 
     function togglePreview(focusedWindow){
         focusedWindow.webContents.send('toggle-markdown-prev');
+    }
+
+    function onOpenFolderClick(focusedWindow){
+        dialog.showOpenDialog({
+            properties: ['openDirectory'],
+            filters: [
+                { name: 'Markdown', extensions: ['md', 'markdown'] }
+            ]
+        }, function(files){
+            if (files && files.length > 0){
+                focusedWindow.webContents.send('open-folder', files[0]);
+            }
+        });
+
+    }
+
+    function onOpenFileClick(focusedWindow){
+        dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+                { name: 'Markdown', extensions: ['md', 'markdown'] }
+            ]
+        }, function(files){
+            if (files && files.length > 0){
+                focusedWindow.webContents.send('open-file', files[0]);
+            }
+        });
     }
 };
